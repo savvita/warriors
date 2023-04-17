@@ -11,12 +11,4 @@ class Walking extends Warrior
     {
         parent::__construct("Walking warrior", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health);
     }
-    public function move()
-    {
-        if($this->health > 0) {
-            return 'Тыгыдык со скоростью воина';
-        }
-
-        return 'Тыгыдык со скоростью зомби';
-    }
 }

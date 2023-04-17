@@ -8,15 +8,22 @@ class Squad
 {
     private $name;
     private $warriors = [];
+    private $commander;
 
-    public function __construct($name)
+    public function __construct($name, $commander)
     {
         $this->name = $name;
+        $this->commander = $commander;
     }
 
     public function getName() : string
     {
         return $this->name;
+    }
+
+    public function getCommander()
+    {
+        return $this->commander;
     }
 
     public function getIsCompleted() : bool

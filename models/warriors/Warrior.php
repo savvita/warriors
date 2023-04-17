@@ -102,5 +102,11 @@ abstract class Warrior
             $this->health = max($this->health - $damage, 0);
         }
     }
-    abstract public function move();
+    public function move() {
+        if($this->health > 0) {
+            return 'Тыгыдык со скоростью воина';
+        }
+
+        return 'Тыгыдык со скоростью зомби';
+    }
 }
