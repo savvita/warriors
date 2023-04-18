@@ -8,8 +8,8 @@ require_once "models/characteristics/WarriorCharacteristic.php";
 
 class PrivateSoldier extends Warrior
 {
-    public function __construct()
+    public function __construct($fraction)
     {
-        parent::__construct("Private", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health);
+        parent::__construct("Private", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health, $fraction);
     }
 }
