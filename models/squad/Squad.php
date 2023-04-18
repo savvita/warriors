@@ -34,6 +34,7 @@ class Squad
     }
     /* End Getters */
 
+    /* Add-onds */
     public function addWarrior($warrior) {
         if(count($this->warriors) >= SquadCharacteristics::max_squad_count) {
             return;
@@ -49,4 +50,40 @@ class Squad
 
         array_splice($this->warriors, $idx, 1);
     }
+    /* End Add-ons */
+
+    /* Actions */
+    public function atack($squad) {
+        if(!$this->getIsCompleted()) {
+            return;
+        }
+
+        if($squad === null) {
+            return;
+        }
+
+        foreach($this->warriors as $warrior) {
+            $enemies = $squad->getWarriors();
+            if(count($enemies) > 0) {
+                $idx = rand(0, count($enemies) - 1);
+                $warrior->atack($enemies[$idx]);
+            }
+        }
+        $squad->checkAlives();
+    }
+
+    public function checkAlives() {
+        $idx = [];
+        $count = count($this->warriors);
+        for($i = 0; $i < $count; $i++) {
+            if($this->warriors[$i]->getHealth() <= 0) {
+                $idx[] = $i;
+            }
+        }
+
+        for($i = count($idx); $i >= 0; $i--) {
+            array_splice($this->warriors, $i, 1);
+        }
+    }
+    /* End Actions */
 }

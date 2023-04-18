@@ -5,9 +5,11 @@ namespace models\warriors;
 abstract class Warrior
 {
     protected $name;
+
     protected $health;
     protected $speed;
     protected $position;
+    protected $fraction;
 
 
     protected $weapon;
@@ -15,10 +17,18 @@ abstract class Warrior
     protected $shield;
     protected $horse;
 
-    protected function __construct($name, $speed, $health) {
-        $this->health = $health;
+    protected $coefficients = [
+        "health" => 0,
+        "damage" => 0,
+        "speed" => 0
+    ];
+
+    protected function __construct($name, $speed, $health, $fraction) {
         $this->name = $name;
-        $this->speed = $speed;
+        $this->health = $health + $health * $fraction->getBuff()->getHealth();
+        $this->speed = $speed + $speed * $fraction->getBuff()->getSpeed();
+
+        $this->fraction = $fraction;
     }
 
     /* Getters */
@@ -26,10 +36,11 @@ abstract class Warrior
         return $this->name;
     }
     public function getSpeed() {
-        return $this->speed + ($this->horse !== null ? $this->horse->getSpeed() : 0);
+        $speed = $this->speed + $this->speed * $this->coefficients["speed"];
+        return $speed + ($this->horse !== null ? $this->horse->getSpeed() : 0);
     }
     public function getHealth() {
-        $health = $this->health;
+        $health = $this->health + $this->health * $this->coefficients["health"];
         if($this->armor != null) {
             $health += $this->armor->getHealth();
         }
@@ -55,23 +66,45 @@ abstract class Warrior
     public function getHorse(){
         return $this->horse;
     }
+
+    public function getFraction() {
+        return $this->fraction;
+    }
+
+    public function getSpeedCoefficient()  {
+        return $this->coefficients["speed"];
+    }
     /* End Getters */
 
     /* Setters */
-    public function setHealth($health) {
-        $this->health = max($health, 0);
+    public function setHealthCoefficient($coeff) {
+        if($coeff === null || $coeff < 0 || $coeff > 1) {
+            return;
+        }
+
+        $this->coefficients["health"] = $coeff;
     }
 
-    public function setSpeed($speed) {
-        $this->speed = max($speed, 0);
+    public function setSpeedCoefficient($coeff) {
+        if($coeff === null || $coeff < 0 || $coeff > 1) {
+            return;
+        }
+
+        $this->coefficients["speed"] = $coeff;
     }
 
-    public function setWeaponDamage($damage) {
+    public function setDamageCoefficient($coeff) {
         if($this->weapon === null) {
             return;
         }
 
-        $this->weapon->setDamage($damage);
+        if($coeff === null || $coeff < 0 || $coeff > 1) {
+            return;
+        }
+
+        $this->coefficients["damage"] = $coeff;
+
+        $this->weapon->setDamageCoefficient($coeff);
     }
 
     /* End Setters */
@@ -85,6 +118,7 @@ abstract class Warrior
 
     public function addWeapon($weapon) {
         $this->weapon = $weapon;
+        $this->setDamageCoefficient($this->fraction->getBuff()->getDamage());
     }
 
     public function addShield($shield) {
@@ -140,7 +174,7 @@ abstract class Warrior
         }
 
         if($damage > 0) {
-            $this->health = max($this->health - $damage, 0);
+            $this->health = max($this->health - $damage / (1 + $this->coefficients["health"]), 0);
         }
     }
     public function move() {

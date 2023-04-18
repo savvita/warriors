@@ -11,9 +11,9 @@ class Commander extends Warrior
 {
     private $title;
     private $achievements = [];
-    public function __construct($title)
+    public function __construct($title, $fraction)
     {
-        parent::__construct("Commander", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health);
+        parent::__construct("Commander", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health, $fraction);
         $this->title = $title;
     }
 
@@ -43,14 +43,15 @@ class Commander extends Warrior
         }
 
         $warriors = $squad->getWarriors();
-        $health = 1 + $this->achievements[$idx]->getHealth();
-        $damage = 1 + $this->achievements[$idx]->getDamage();
-        $speed = 1 + $this->achievements[$idx]->getSpeed();
+        $health = $this->achievements[$idx]->getHealth();
+        $damage = $this->achievements[$idx]->getDamage();
+        $speed = $this->achievements[$idx]->getSpeed();
+
 
         foreach($warriors as $warrior) {
-            $warrior->setHealth($warrior->getHealth() * $health);
-            $warrior->setSpeed($warrior->getSpeed() * $speed);
-            $warrior->setWeaponDamage($warrior->getWeapon()->getDamage() * $damage);
+            $warrior->setHealthCoefficient($health);
+            $warrior->setSpeedCoefficient($speed);
+            $warrior->setDamageCoefficient($damage);
         }
         array_splice($this->achievements, $idx, 1);
     }
