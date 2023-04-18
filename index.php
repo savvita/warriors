@@ -4,6 +4,57 @@ include_once 'models/armors/include_armors.php';
 include_once 'models/weapons/include_weapons.php';
 include_once 'models/accessories/include_accessories.php';
 include_once 'models/warriors/include_warriors.php';
+include_once 'models/achievements/include_achievements.php';
+include_once 'models/squad/Squad.php';
+
+$commander = new \models\warriors\Commander("Пушистый лапки");
+$commander->addAchievement(new models\achievements\Inspiration());
+$commander->addWeapon(new \models\weapons\Axe());
+$commander->addArmor(new \models\armors\LamellarHeavyArmor());
+
+$horse = new models\accessories\Horse();
+$horse->addArmor(new models\armors\SkinLightArmor());
+
+$commander->addHorse($horse);
+
+$squad = new \models\squad\Squad("Suicide Squad", $commander);
+
+$warr = [
+    new \models\warriors\PrivateSoldier(),
+    new \models\warriors\PrivateSoldier(),
+    new \models\warriors\PrivateSoldier(),
+    new \models\warriors\PrivateSoldier(),
+    new \models\warriors\PrivateSoldier(),
+    new \models\warriors\PrivateSoldier(),
+];
+
+$warr[0]->addWeapon(new \models\weapons\OneHandedSword());
+$warr[1]->addWeapon(new \models\weapons\TwoHandedSword());
+$warr[2]->addWeapon(new \models\weapons\Peak());
+$warr[3]->addWeapon(new \models\weapons\Axe());
+$warr[4]->addWeapon(new \models\weapons\Bow());
+$warr[5]->addWeapon(new \models\weapons\Halberd());
+
+$warr[2]->addArmor(new \models\armors\TextileLightArmor());
+$warr[4]->addArmor(new \models\armors\SteelHeavyArmor());
+
+foreach($warr as $war) {
+    $squad->addWarrior($war);
+}
+
+$squad->getCommander()->addAchievement(new \models\achievements\Inspiration());
+echo "<pre>";
+print_r($squad);
+echo "</pre>";
+
+echo '<hr />';
+
+$squad->getCommander()->useAchievement($squad, 0);
+
+
+echo "<pre>";
+print_r($squad);
+echo "</pre>";
 
 $armors = [
     "Light" => [
@@ -36,13 +87,9 @@ $accessories = [
     new models\accessories\Shield()
 ];
 
-$warriors = [
-    "Horseman" => [
-        new models\warriors\Horseman()
-    ],
-    "Walking" => [
-        new models\warriors\Walking()
-    ]
+$achievements = [
+    new models\achievements\Inspiration(),
+    new models\achievements\Fury()
 ];
 
 echo '<h2>Armors</h2>';
@@ -99,31 +146,27 @@ foreach ($accessories as $accessory) {
 
 echo '</ul>';
 
-echo '<h2>Warriors</h2>';
+echo '<h2>Achievements</h2>';
 echo '<ul>';
 
-foreach ($warriors as $type=>$values) {
-    echo "<li>$type</li>";
-
-    if(count($values) > 0) {
-        echo '<ul>';
-        foreach($values as $warrior) {
-            $name = $warrior->getName();
-            $health = $warrior->getHealth();
-            $speed = $warrior->getSpeed();
-            echo "<li>$name, health: $health, speed: $speed</li>";
-        }
-        echo '</ul>';
-    }
+foreach ($achievements as $achievement) {
+    $name = $achievement->getName();
+    $description = $achievement->getDescription();
+    echo "<li>$name, description: $description</li>";
 }
+
 echo '</ul>';
 
 echo '<hr />';
 
-$warr2 = new models\warriors\Walking();
+$warr2 = new models\warriors\PrivateSoldier();
 $warr2->addWeapon(new models\weapons\Peak());
 
-$warr1 = new models\warriors\Horseman();
+$warr1 = new models\warriors\PrivateSoldier();
+
+$horse1 = new models\accessories\Horse();
+$warr1->addHorse($horse1);
+
 $warr1->addWeapon(new models\weapons\Axe());
 $warr1->addShield(new models\accessories\Shield());
 $warr1->addArmor(new models\armors\LamellarHeavyArmor());
