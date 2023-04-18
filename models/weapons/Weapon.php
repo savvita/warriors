@@ -28,4 +28,8 @@ abstract class Weapon
     {
         return $this->damage;
     }
+
+    public function setDamage($damage) {
+        $this->damage = max($damage, 0);
+    }
 }
