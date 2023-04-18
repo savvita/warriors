@@ -27,15 +27,15 @@ abstract class Achievement
     {
         return $this->description;
     }
-    public function getHealth() : int {
+    public function getHealth() : float {
         return $this->values["health"];
     }
 
-    public function getDamage() : int {
+    public function getDamage() : float {
         return $this->values["damage"];
     }
 
-    public function getSpeed() : int {
+    public function getSpeed() : float {
         return $this->values["speed"];
     }
     /* End Getters */
