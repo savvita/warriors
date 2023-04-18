@@ -1,4 +1,4 @@
 <?php
 
-require_once 'models/warriors/Horseman.php';
-require_once 'models/warriors/Walking.php';
+require_once 'models/warriors/PrivateSoldier.php';
+require_once 'models/warriors/Commander.php';
