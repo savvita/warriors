@@ -4,9 +4,9 @@ namespace models\weather;
 
 abstract class Weather
 {
-    private $name;
-    private $description;
-    private $value;
+    private string $name;
+    private string $description;
+    private float $value;
 
     protected function __construct($name, $value)
     {
@@ -15,22 +15,22 @@ abstract class Weather
     }
 
     /* Getters */
-    public function getName() {
+    public function getName() : string {
         return $this->name;
     }
 
-    public function getValue() {
+    public function getValue() : float {
         return $this->value;
     }
 
-    public function getDescription() {
+    public function getDescription() : string {
         return $this->description;
     }
 
     /* End Getters */
 
     /* Add-ons */
-    protected function addDescription($description) {
+    protected function addDescription($description) : void {
         $this->description = $description;
     }
     /* End Add-ons */

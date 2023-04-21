@@ -2,9 +2,7 @@
 
 namespace models\achievements;
 use models\characteristics\AchievementCharacteristics;
-require_once 'Achievement.php';
-require_once 'models/characteristics/AchievementCharacteristics.php';
-
+require_once 'models/achievements/Achievement.php';
 class ZombieBuff extends Achievement
 {
     public function __construct()

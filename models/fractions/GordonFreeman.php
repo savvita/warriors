@@ -3,13 +3,12 @@
 namespace models\fractions;
 
 use models\achievements\GordonFreemanBuff;
-include_once 'models/achievements/GordonFreemanBuff.php';
-include_once 'models/fractions/Fraction.php';
+require_once 'models/achievements/GordonFreemanBuff.php';
+
 class GordonFreeman extends Fraction
 {
     public function __construct()
     {
-        $buff = new GordonFreemanBuff();
-        parent::__construct("Gordon Freeman", $buff);
+        parent::__construct("Gordon Freeman", new GordonFreemanBuff());
     }
 }

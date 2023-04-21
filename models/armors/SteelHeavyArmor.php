@@ -3,9 +3,6 @@
 namespace models\armors;
 use models\characteristics\ArmorCharacteristics;
 
-require_once 'HeavyArmor.php';
-require_once "models/characteristics/ArmorCharacteristics.php";
-
 class SteelHeavyArmor extends HeavyArmor
 {
     public function __construct() {

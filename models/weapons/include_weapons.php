@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Weapon.php';
+require_once "models/characteristics/WeaponCharacteristics.php";
 require_once 'models/weapons/Axe.php';
 require_once 'models/weapons/Halberd.php';
 require_once 'models/weapons/Morgenstern.php';

@@ -1,5 +1,6 @@
 <?php
-
+require_once 'Achievement.php';
+require_once 'models/characteristics/AchievementCharacteristics.php';
 require_once 'models/achievements/Inspiration.php';
 require_once 'models/achievements/Fury.php';
 require_once 'models/achievements/ZombieBuff.php';

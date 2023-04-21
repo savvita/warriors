@@ -4,30 +4,47 @@ namespace models\weapons;
 
 abstract class Weapon
 {
-    protected $name;
-    protected $damage;
-    protected $atack_distance;
-    protected $damage_coefficient = 0;
+    protected string $name;
+    protected float $damage;
+    protected float $atack_distance;
+    protected float $damage_coefficient = 0;
 
     protected function __construct($name, $damage, $atack_distance) {
-        $this->damage = $damage;
-        $this->name = $name;
-        $this->atack_distance = $atack_distance;
+        $this->setName($name);
+        $this->setDamage($damage);
+        $this->setAtackDistance($atack_distance);
     }
 
     /* Getters */
-    public function getName() {
+    public function getName() :string {
         return $this->name;
     }
-    public function getDamage() {
+    public function getDamage() : float {
         return $this->damage + $this->damage * $this->damage_coefficient;
     }
-    public function getAtackDistance() {
+    public function getAtackDistance() : float {
         return $this->atack_distance;
     }
+
     /* End Getters */
 
     /* Setters */
+    public function setName(string $name): void {
+        if($name === null || empty($name)) {
+            return;
+        }
+        $this->name = $name;
+    }
+
+    public function setAtackDistance(float $atack_distance): void {
+        if($atack_distance > 0) {
+            $this->atack_distance = $atack_distance;
+        }
+    }
+
+    public function setDamage($damage) : void {
+        $this->damage = max($damage, 0);
+    }
     public function setDamageCoefficient($coeff) {
         if($coeff === null || $coeff < 0 || $coeff > 1) {
             return;
@@ -37,9 +54,9 @@ abstract class Weapon
     }
     /* End Setters */
 
-    public abstract function getAtack();
+    /* Actions */
+    public abstract function getAtack() : float;
 
-    public function setDamage($damage) {
-        $this->damage = max($damage, 0);
-    }
+    /* End Actions */
+
 }

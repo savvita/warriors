@@ -6,9 +6,9 @@ use models\characteristics\SquadCharacteristics;
 require_once "models/characteristics/SquadCharacteristics.php";
 class Squad
 {
-    private $name;
+    private string $name;
     private $commander;
-    private $warriors = [];
+    private array $warriors = [];
 
     public function __construct($name, $commander)
     {
@@ -35,7 +35,11 @@ class Squad
     /* End Getters */
 
     /* Add-onds */
-    public function addWarrior($warrior) {
+    public function addWarrior($warrior) : void {
+        if($warrior === null) {
+            return;
+        }
+
         if(count($this->warriors) >= SquadCharacteristics::max_squad_count) {
             return;
         }
@@ -43,7 +47,7 @@ class Squad
         $this->warriors[] = $warrior;
     }
 
-    public function removeWarrior($idx) {
+    public function removeWarrior($idx) : void {
         if($idx < 0 || $idx >= count($this->warriors)) {
             return;
         }
@@ -53,7 +57,7 @@ class Squad
     /* End Add-ons */
 
     /* Actions */
-    public function atack($squad) {
+    public function atack($squad) : void {
         if(!$this->getIsCompleted()) {
             return;
         }
@@ -72,7 +76,7 @@ class Squad
         $squad->checkAlives();
     }
 
-    public function checkAlives() {
+    public function checkAlives() : void {
         $idx = [];
         $count = count($this->warriors);
         for($i = 0; $i < $count; $i++) {

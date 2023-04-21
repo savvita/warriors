@@ -4,9 +4,6 @@ namespace models\armors;
 
 use models\characteristics\ArmorCharacteristics;
 
-require_once  'models/characteristics/ArmorCharacteristics.php';
-
-require_once "Armor.php";
 
 abstract class HeavyArmor extends Armor
 {

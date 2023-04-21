@@ -4,7 +4,7 @@ namespace models\fractions;
 
 abstract class Fraction
 {
-    private $name;
+    private string $name;
     private $buff;
 
     protected function __construct($name, $buff)
@@ -14,7 +14,7 @@ abstract class Fraction
     }
 
     /* Getters */
-    public function getName() {
+    public function getName() : string {
         return $this->name;
     }
 

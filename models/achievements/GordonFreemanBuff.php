@@ -3,7 +3,8 @@
 namespace models\achievements;
 
 use models\characteristics\AchievementCharacteristics;
-include_once 'models/achievements/Achievement.php';
+require_once 'models/achievements/Achievement.php';
+require_once 'models/characteristics/AchievementCharacteristics.php';
 class GordonFreemanBuff extends Achievement
 {
     public function __construct()
