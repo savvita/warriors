@@ -14,13 +14,13 @@
                         Items
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="../warriors.php">Warriors</a></li>
-                        <li><a class="dropdown-item" href="../weapons.php">Weapons</a></li>
-                        <li><a class="dropdown-item" href="../armors.php">Armors</a></li>
-                        <li><a class="dropdown-item" href="../accessories.php">Accessories</a></li>
-                        <li><a class="dropdown-item" href="../achievements.php">Achievements</a></li>
-                        <li><a class="dropdown-item" href="../fractions.php">Fractions</a></li>
-                        <li><a class="dropdown-item" href="../weather.php">Weather</a></li>
+                        <li><a class="dropdown-item" href="./warriors.php">Warriors</a></li>
+                        <li><a class="dropdown-item" href="./weapons.php">Weapons</a></li>
+                        <li><a class="dropdown-item" href="./armors.php">Armors</a></li>
+                        <li><a class="dropdown-item" href="./accessories.php">Accessories</a></li>
+                        <li><a class="dropdown-item" href="./achievements.php">Achievements</a></li>
+                        <li><a class="dropdown-item" href="./fractions.php">Fractions</a></li>
+                        <li><a class="dropdown-item" href="./weather.php">Weather</a></li>
                     </ul>
                 </li>
             </ul>
