@@ -3,13 +3,12 @@
 namespace models\fractions;
 
 use models\achievements\ZombieBuff;
-include_once 'models/achievements/ZombieBuff.php';
-include_once 'models/fractions/Fraction.php';
+require_once 'models/achievements/ZombieBuff.php';
+
 class Zombie extends Fraction
 {
     public function __construct()
     {
-        $buff = new ZombieBuff();
-        parent::__construct("Zombie", $buff);
+        parent::__construct("Zombie", new ZombieBuff());
     }
 }

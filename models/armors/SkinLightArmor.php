@@ -3,8 +3,6 @@
 namespace models\armors;
 use models\characteristics\ArmorCharacteristics;
 
-require_once 'LightArmor.php';
-require_once "models/characteristics/ArmorCharacteristics.php";
 class SkinLightArmor extends LightArmor
 {
     public function __construct() {

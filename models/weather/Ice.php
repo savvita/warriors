@@ -3,9 +3,6 @@
 namespace models\weather;
 use models\characteristics\WeatherCharacteristics;
 
-require_once 'models/weather/Weather.php';
-
-require_once 'models/characteristics/WeatherCharacteristics.php';
 class Ice extends Weather
 {
     public function __construct()

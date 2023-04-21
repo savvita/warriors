@@ -14,8 +14,7 @@ class Axe extends Weapon
         parent::__construct("Axe", WeaponCharacteristics::axe_damage, WeaponCharacteristics::axe_atack_distance);
     }
 
-    public function getAtack()
-    {
+    public function getAtack(): float{
         return $this->damage;
     }
 }

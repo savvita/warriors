@@ -3,9 +3,6 @@
 namespace models\armors;
 use models\characteristics\ArmorCharacteristics;
 
-require_once 'MediumArmor.php';
-require_once "models/characteristics/ArmorCharacteristics.php";
-
 class ChainMediumArmor extends MediumArmor
 {
     public function __construct() {

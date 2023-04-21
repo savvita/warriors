@@ -3,13 +3,12 @@
 namespace models\fractions;
 
 use models\achievements\VampireBuff;
-include_once 'models/achievements/VampireBuff.php';
-include_once 'models/fractions/Fraction.php';
+require_once 'models/achievements/VampireBuff.php';
+
 class Vampire extends Fraction
 {
     public function __construct()
     {
-        $buff = new VampireBuff();
-        parent::__construct("Vampire", $buff);
+        parent::__construct("Vampire", new VampireBuff());
     }
 }

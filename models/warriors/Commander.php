@@ -3,14 +3,12 @@
 namespace models\warriors;
 
 use models\characteristics\WarriorCharacteristic;
-
-require_once "models\warriors\Warrior.php";
+require_once 'Warrior.php';
 require_once "models/characteristics/WarriorCharacteristic.php";
-
 class Commander extends Warrior
 {
-    private $title;
-    private $achievements = [];
+    private string $title;
+    private array $achievements = [];
     public function __construct($title, $fraction)
     {
         parent::__construct("Commander", WarriorCharacteristic::warrior_speed, WarriorCharacteristic::warrior_health, $fraction);
@@ -18,7 +16,7 @@ class Commander extends Warrior
     }
 
     /* Getters */
-    public function getTitle() {
+    public function getTitle() : string {
         return $this->title;
     }
     public function getAchievements() : array {
@@ -27,13 +25,13 @@ class Commander extends Warrior
     /* End Getters */
 
     /* Add-ons */
-    public function addAchievement($achievement) {
+    public function addAchievement($achievement) : void {
         $this->achievements[] = $achievement;
     }
     /* End Add-ons */
 
     /* Actions */
-    public function useAchievement($squad, $idx = 0) {
+    public function useAchievement($squad, $idx = 0) : void {
         if(!$squad || !is_array($squad->getWarriors())) {
             return;
         }
@@ -49,9 +47,9 @@ class Commander extends Warrior
 
 
         foreach($warriors as $warrior) {
-            $warrior->setHealthCoefficient($health);
-            $warrior->setSpeedCoefficient($speed);
-            $warrior->setDamageCoefficient($damage);
+            $warrior->setHealthCoefficient($warrior->getHealthCoefficient() + $health);
+            $warrior->setSpeedCoefficient($warrior->getSpeedCoefficient() + $speed);
+            $warrior->setDamageCoefficient($warrior->getDamageCoefficient() + $damage);
         }
         array_splice($this->achievements, $idx, 1);
     }

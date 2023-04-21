@@ -2,10 +2,10 @@
 
 namespace models\accessories;
 use models\characteristics\AccessoryCharacteristics;
-require_once "models/characteristics/AccessoryCharacteristics.php";
+
 class Shield
 {
-    private $name;
+    private string $name;
     private $armor;
 
     public function __construct()
@@ -14,12 +14,12 @@ class Shield
         $this->armor = AccessoryCharacteristics::shield_armor;
     }
 
-    public function getName(): string
-    {
+    /* Getter */
+    public function getName(): string {
         return $this->name;
     }
-    public function getArmor(): int
-    {
+    public function getArmor() {
         return $this->armor;
     }
+    /* End Getters */
 }

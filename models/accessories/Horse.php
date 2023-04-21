@@ -2,13 +2,13 @@
 
 namespace models\accessories;
 use models\characteristics\AccessoryCharacteristics;
-require_once "models/characteristics/AccessoryCharacteristics.php";
+
 class Horse
 {
-    private $health;
-    private $speed;
+    private float $health;
+    private float $speed;
 
-    private $name;
+    private string $name;
 
     private $armor;
 
@@ -23,11 +23,11 @@ class Horse
     public function getName(): string {
         return $this->name;
     }
-    public function getHealth(): int {
+    public function getHealth(): float {
         return $this->health;
     }
 
-    public function getSpeed(): int {
+    public function getSpeed(): float {
         return $this->health > 0 ? $this->speed : 0;
     }
 
@@ -39,6 +39,10 @@ class Horse
 
     /* Add-ons */
     public function addArmor($armor) {
+        if($armor === null) {
+            return;
+        }
+
         $this->armor = $armor;
         $this->speed = max($this->speed * (1 - $armor->getWeight()), 0);
     }

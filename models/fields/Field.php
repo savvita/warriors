@@ -4,19 +4,21 @@ namespace models\fields;
 
 class Field
 {
-    private $name;
-    private $weather = [];
-    private $squads = [];
+    private string $name;
+    private array $weather = [];
+    private array $squads = [];
 
-    private $isFinished = false;
+    private bool $isFinished = false;
 
     public function __construct($name)
     {
-        $this->name = $name;
+        if($name !== null) {
+            $this->name = $name;
+        }
     }
 
     /* Getters */
-    public function getName() {
+    public function getName() : string {
         return $this->name;
     }
 
@@ -43,22 +45,21 @@ class Field
     /* End Getters */
 
     /* Add-ons */
-    public function addSquad($squad) {
+    public function addSquad($squad) : void {
         if($squad === null || !$squad->getIsCompleted()) {
             return;
         }
         $this->squads[] = $squad;
     }
-    public function addWeather($weather) {
+    public function addWeather($weather) : void {
         if($weather != null) {
             $current = $this->getWeatherEffect();
             $this->weather[] = $weather;
-            print_r($this->weather);
             $this->applyWeatherEffect($current);
         }
     }
 
-    public function removeWeather($idx) {
+    public function removeWeather($idx) : void {
         if($idx >= 0 && $idx < count($this->weather)) {
             $current = $this->getWeatherEffect();
             array_splice($this->weather, $idx, 1);
@@ -68,10 +69,10 @@ class Field
     /* End Add-ons */
 
     /* Actions */
-    public function start() {
+    public function start() : void {
         $this->isFinished = false;
     }
-    public function atack() {
+    public function atack() : void {
         $idx = array_rand($this->squads, 2);
         shuffle($idx);
         $this->squads[$idx[0]]->atack($this->squads[$idx[1]]);
@@ -93,7 +94,7 @@ class Field
             $this->isFinished = true;
         }
     }
-    private function applyWeatherEffect($current) {
+    private function applyWeatherEffect($current) : void {
         $new = $this->getWeatherEffect();
         $coeff = $new - $current;
         foreach($this->squads as $squad) {
